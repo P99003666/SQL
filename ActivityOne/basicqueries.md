@@ -70,7 +70,7 @@ Ans: "Pending"
 Query: Select p.Productionid ,m.Heroname, max(m.Language) from productions as p left join movie as m ON p.Productionid = m.Productionid group by m.Heroname;
 
 10.Write the query to display the production name, owner name who has produced movie for more languages.
-Query: "Pending"
+Query: select Distinct p.Productionname,p.Ownername ,count(p.Productionname) as counter  from  movie as m right join productions as p ON  m.productionid =p.productionid  group by(m.language) order by(counter) desc limit 1;
 
 11.Write the query to display the productionname, producername who has not produced any movie
 Query: select p.productionname, p.ownername from productions as p left join movies as m on p.productionid = m.productionid group by p.productionid having count(m.moviename)=0;
