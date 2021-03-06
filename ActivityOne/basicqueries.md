@@ -64,13 +64,13 @@ Query: select p.Productionname, m.Moviename, m.Heroname, m.language from product
 
 8.Write the query name to display the heroinename who acted in the different productions but not in same production id.
 
-Ans: Amy
+Ans: "Pending"
 
 9.Write the query to display the heroname who acted in maximum languages.
 Query: Select p.Productionid ,m.Heroname, max(m.Language) from productions as p left join movie as m ON p.Productionid = m.Productionid group by m.Heroname;
 
 10.Write the query to display the production name, owner name who has produced movie for more languages.
-Query: 
+Query: "Pending"
 
 11.Write the query to display the productionname, producername who has not produced any movie
 Query: select p.productionname, p.ownername from productions as p left join movies as m on p.productionid = m.productionid group by p.productionid having count(m.moviename)=0;
