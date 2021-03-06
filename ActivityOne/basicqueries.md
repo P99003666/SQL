@@ -44,13 +44,14 @@ Advanced Queries
 Query: select p.productionid, m.moviename, count(m.productionid) from movies as m inner join productions as p on p.productionid=m.productionid group by p.productionid;
 
 2.Write the query to display production name, owner name have produced more than 2 movies.
-Query: select p.Ownername,p.Productionid ,p.Productionname, count(m.Movienname) from productions as p left join movie as m ON p.Productionid = m.Productionid group by p.Productionid having count(Movienname)>=2;
+Query: select p.Ownername,p.Productionid ,p.Productionname, count(m.moviename) from productions as p left join movies as m ON p.productionid = m.productionid group by p.productionid having count(moviename)>=2;
 
 3.Write the query to display production name, owner name have produced maximum movies
 Query: select p.Productionid ,p.Productionname, max(mv.Moviename) from productions as p left join movies as mv ON p.Productionid = mv.Productionid group by p.Productionid ORDER BY 'Productionid' DESC LIMIT 1;
 
 4.Write the query to display the moviename, heroname and productionname acted in the producer name= ’Subaskaran’.
-Query:  select p.Productionname, m.Moviename, m.Heroname, m.language from productions as p left join movies as m on p.productionid = m.Productionid where language !='Subaskaran';
+Query:  select p.Productionname, m.Moviename, m.Heroname, m.language from productions as p left join movies as m on p.productionid = m.Productionid where ownername ='Subaskaran';
+
 
 5.Write the query to display the moviename, heroname whose productionid ends with 82.
 Query:  select p.Productionname, m.Moviename, m.Heroname, m.language, m.productionid from productions as p left join movies as m on p.productionid = m.Productionid where p.productionid like "%82";
