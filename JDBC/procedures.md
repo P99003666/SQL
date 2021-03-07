@@ -13,3 +13,9 @@ show databases;
 show procedure status where db = 'activity'; 
 
 
+delimiter //
+create procedure getProductions()
+Begin
+select * from productions;
+end //
+
