@@ -32,7 +32,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	@Override
 	public int add(Player pl) throws SQLException {
 
-		String query = "insert into players(player_name, " + "player_address, " + "player_numberOfMatches, " + "wickets, " + "skill, " + " dateOfBirth, "+" teamId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String query = "insert into PLAYERS(player_name, " + "player_address, " + "player_numberOfMatches, " + "wickets, " + "skill, " + " dateOfBirth, "+" teamId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, pl.getPlayer_name());
 		ps.setString(2, pl.getPlayer_address());
@@ -47,7 +47,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 
 	@Override
 	public void delete(int id) throws SQLException {
-		String query = "delete from players where player_id =?";
+		String query = "delete from PLAYERS where player_id =?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
 		ps.executeUpdate();
@@ -57,7 +57,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	@Override
 	public Player getPlayer(int id) throws SQLException {
 
-		String query = "select * from players where player_id= ?";
+		String query = "select * from PLAYERS where player_id= ?";
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setInt(1, id);
@@ -84,7 +84,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	}
 	public Player getPlayerByName(String name) throws SQLException {
 
-		String query = "select * from players where player_name= ?";
+		String query = "select * from PLAYERS where player_name= ?";
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setString(1, name);
@@ -111,7 +111,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	
 	public Player getPlayerBySkill(String skill) throws SQLException {
 
-		String query = "select * from players where skill= ?";
+		String query = "select * from PLAYERS where skill= ?";
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setString(1, skill);
@@ -137,7 +137,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	}
 	public Player getPlayerByDate(String date) throws SQLException {
 
-		String query = "select * from players where dateOfBirth= ?";
+		String query = "select * from PLAYERS where dateOfBirth= ?";
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setString(1, date);
@@ -163,7 +163,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	}
 	@Override
 	public List<Player> getPlayers() throws SQLException {
-		String query = "select * from players";
+		String query = "select * from PLAYERS";
 		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		List<Player> ls = new ArrayList();
@@ -185,7 +185,7 @@ public class PlayerDaoImplementation implements PlayerDao {
 	@Override
 	public void update(Player pl) throws SQLException {
 
-		String query = "update players set player_name= ?, " + " player_address= ?, " + " player_numberOfMatches= ?, " + " wickets = ? , " + " skill = ? where player_id = ?";
+		String query = "update PLAYERS set player_name= ?, " + " player_address= ?, " + " player_numberOfMatches= ?, " + " wickets = ? , " + " skill = ? where player_id = ?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, pl.getPlayer_name());
 		ps.setString(2, pl.getPlayer_address());

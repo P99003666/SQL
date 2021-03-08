@@ -11,7 +11,7 @@ public class DatabaseConnection {
 	static {
 		String url = "jdbc:mysql://localhost:3306/miniproject";
 		String user = "root";
-		String pass = "root";
+		String pass = "Root@123";
 		try {
 			con = DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {

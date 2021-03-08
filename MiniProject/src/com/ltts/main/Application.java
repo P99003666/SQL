@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-
 //List<Employee> ls = empDao.getEmployees();
 //for (Employee allEmp : ls) {
 //	System.out.println(allEmp);
@@ -27,19 +26,18 @@ public class Application {
 		int updateField;
 		int searchChoice;
 		int initialChoice;
-		String teamName,ownerName, coachName; 
+		String teamName, ownerName, coachName;
 		Player play = new Player();
 		Team tm = new Team();
 		PlayerDaoImplementation playDao = new PlayerDaoImplementation();
 		TeamDaoImplementation teamDao = new TeamDaoImplementation();
-		
+
 		System.out.println("What Would you like to add \n 1. Enter 1 for team \n 2. Enter 2 for player");
 		initialChoice = Integer.parseInt(br.readLine());
-		switch(initialChoice)
-		{
+		switch (initialChoice) {
 		case 1:
 			do {
-				
+
 				System.out.println("Select One Option from Below Menu \n");
 				System.out.println("1: Insert Data Into Team");
 				System.out.println("2: Get Data Into Team");
@@ -54,7 +52,7 @@ public class Application {
 					System.out.println("Enter Owner Name \n");
 					ownerName = br.readLine();
 					System.out.println("Enter Coach Name \n");
-					coachName= br.readLine();
+					coachName = br.readLine();
 					tm.setTeam_name(teamName);
 					tm.setOwnerName(ownerName);
 					tm.setCoachName(coachName);
@@ -62,100 +60,50 @@ public class Application {
 					System.out.println("Data Added Successfully");
 					break;
 				case 2:
-					System.out.println("Ways To Search \n 1. By Id \n 2.By Name \n 3. By Skill \n 4. By Date \n");
+					System.out.println("Ways To Search \n 1. By Id \n");
 					searchChoice = Integer.parseInt(br.readLine());
-					if(searchChoice == 1)
-					{
+					if (searchChoice == 1) {
 						System.out.println("Enter Id to be searched \n");
-						playerId = Integer.parseInt(br.readLine());
+						teamId = Integer.parseInt(br.readLine());
 						System.out.println("Data Fetched");
-						Player e = playDao.getPlayer(playerId);
-						System.out.println(e.getPlayer_id() + " " + e.getPlayer_name() + " " + e.getPlayer_address() + " " + e.getPlayer_numberOfMatches() + " " + e.getWickets() +" "+ e.getSkill());
-						
-					}
-					else if(searchChoice == 2)
-					{
-						System.out.println("Enter name to be searched \n");
-						playerName = br.readLine();
-						System.out.println("Data Fetched");
-						Player e = playDao.getPlayerByName(playerName);
-						System.out.println(e.getPlayer_id() + " " + e.getPlayer_name() + " " + e.getPlayer_address() + " " + e.getPlayer_numberOfMatches() + " " + e.getWickets() +" "+ e.getSkill());
-					}
-					else if(searchChoice==3)
-					{
-						System.out.println("Enter Skill To Search \n");
-						skill = br.readLine();
-						System.out.println("Data Fetched");
-						Player e = playDao.getPlayerBySkill(skill);
-						System.out.println(e.getPlayer_id() + " " + e.getPlayer_name() + " " + e.getPlayer_address() + " " + e.getPlayer_numberOfMatches() + " " + e.getWickets() +" "+ e.getSkill());
-					}
-					else if(searchChoice == 4)
-					{
-						System.out.println("Enter Date to be searched \n");
-						dateOfBirth = br.readLine();
-						System.out.println("Data Fetched");
-						Player e = playDao.getPlayerByDate(dateOfBirth);
-						System.out.println(e.getPlayer_id() + " " + e.getPlayer_name() + " " + e.getPlayer_address() + " " + e.getPlayer_numberOfMatches() + " " + e.getWickets() +" "+ e.getSkill());
-					}
-					else
-					{
+						Team e = teamDao.getTeam(teamId);
+						System.out.println(e.getTeam_id() + " " + e.getTeam_name() + " " + e.getOwnerName() + " "
+								+ e.getCoachName());
+
+					} else {
 						System.out.println("Invalid choice");
 					}
 					break;
 				case 3:
-					System.out.println("Enter Player Id");
-					playerId = Integer.parseInt(br.readLine());
+					System.out.println("Enter Team Id");
+					teamId = Integer.parseInt(br.readLine());
 					System.out.println("Enter Field to be updated \n");
 					System.out.println("Enter 1 for Name Updation \n");
-					System.out.println("Enter 2 for Address Updation \n");
-					System.out.println("Enter 3 for Number of Match Updation \n");
-					System.out.println("Enter 4 for Wickets Updation \n");
-					System.out.println("Enter 5 for Skill Updation \n");
+					System.out.println("Enter 2 for Owner Updation \n");
+					System.out.println("Enter 3 for Coach Updation \n");
+
 					updateField = Integer.parseInt(br.readLine());
 					if (updateField == 1) {
-						System.out.println("Enter Player Name");
-						playerName = br.readLine();
-						Player tempEmployee = playDao.getPlayer(playerId);
-						System.out.println("Yha pohocha");
-						tempEmployee.setPlayer_name(playerName);
-						System.out.println("Yha Bhi Pohocha");
-						playDao.update(tempEmployee);
+						System.out.println("Enter Team Name");
+						teamName = br.readLine();
+						Team tempEmployee = teamDao.getTeam(teamId);
+						tempEmployee.setTeam_name(teamName);
+						teamDao.updateTeam(tempEmployee);
 						System.out.println("Successfully Updated");
 
-					}
-					else if(updateField == 2)
-					{
-						System.out.println("Enter Player Name");
-						playerName = br.readLine();
-						Player tempEmployee = playDao.getPlayer(playerId);
-						tempEmployee.setPlayer_name(playerName);
-						playDao.update(tempEmployee);
+					} else if (updateField == 2) {
+						System.out.println("Enter Owner Name");
+						ownerName = br.readLine();
+						Team tempEmployee = teamDao.getTeam(teamId);
+						tempEmployee.setOwnerName(ownerName);
+						teamDao.updateTeam(tempEmployee);
 						System.out.println("Successfully Updated");
-					}
-					else if(updateField == 3)
-					{
-						System.out.println("Enter Number of Matches");
-						numberOfMatches =Integer.parseInt(br.readLine()) ;
-						Player tempEmployee = playDao.getPlayer(playerId);
-						tempEmployee.setPlayer_numberOfMatches(numberOfMatches);
-						playDao.update(tempEmployee);
-						System.out.println("Successfully Updated");
-					}
-					else if(updateField == 4)
-					{
-						System.out.println("Enter Wickets");
-						wickets = Integer.parseInt(br.readLine());
-						Player tempEmployee = playDao.getPlayer(playerId);
-						tempEmployee.setWickets(wickets);
-						playDao.update(tempEmployee);
-						System.out.println("Successfully Updated");
-					}
-					else {
-						System.out.println("Enter Player Skill");
-						skill = br.readLine();
-						Player tempEmployee = playDao.getPlayer(playerId);
-						tempEmployee.setSkill(skill);
-						playDao.update(tempEmployee);
+					} else {
+						System.out.println("Enter Coach Name");
+						coachName = br.readLine();
+						Team tempEmployee = teamDao.getTeam(teamId);
+						tempEmployee.setCoachName(coachName);
+						teamDao.updateTeam(tempEmployee);
 						System.out.println("Successfully Updated");
 					}
 					break;
@@ -167,10 +115,10 @@ public class Application {
 					break;
 				case 5:
 					System.out.println("All Teams");
-					 List<Team> ls = teamDao.getTeams(); 
-				        for (Team allEmp : ls) { 
-				            System.out.println(allEmp); 
-				        } 
+					List<Team> ls = teamDao.getTeams();
+					for (Team allEmp : ls) {
+						System.out.println(allEmp);
+					}
 					break;
 				default:
 					System.out.println("Entered Wrong Input");
@@ -227,41 +175,37 @@ public class Application {
 				case 2:
 					System.out.println("Ways To Search \n 1. By Id \n 2.By Name \n 3. By Skill \n 4. By Date \n");
 					searchChoice = Integer.parseInt(br.readLine());
-					if(searchChoice == 1)
-					{
+					if (searchChoice == 1) {
 						System.out.println("Enter Id to be searched \n");
 						playerId = Integer.parseInt(br.readLine());
 						System.out.println("Data Fetched");
 						Player p1 = playDao.getPlayer(playerId);
-						System.out.println( p1.getPlayer_name() + " " + p1.getPlayer_address() + " " + p1.getPlayer_numberOfMatches() + " " + p1.getWickets() +" "+ p1.getSkill());
-						
-					}
-					else if(searchChoice == 2)
-					{
+						System.out.println(p1.getPlayer_name() + " " + p1.getPlayer_address() + " "
+								+ p1.getPlayer_numberOfMatches() + " " + p1.getWickets() + " " + p1.getSkill() + " " + p1.getDateOfBirth());
+
+					} else if (searchChoice == 2) {
 						System.out.println("Enter name to be searched \n");
 						playerName = br.readLine();
 						System.out.println("Data Fetched");
 						Player e1 = playDao.getPlayerByName(playerName);
-						System.out.println(e1.getPlayer_id() + " " + e1.getPlayer_name() + " " + e1.getPlayer_address() + " " + e1.getPlayer_numberOfMatches() + " " + e1.getWickets() +" "+ e1.getSkill());
-					}
-					else if(searchChoice==3)
-					{
+						System.out.println(e1.getPlayer_id() + " " + e1.getPlayer_name() + " " + e1.getPlayer_address()
+								+ " " + e1.getPlayer_numberOfMatches() + " " + e1.getWickets() + " " + e1.getSkill()
+								+ " " + e1.getDateOfBirth());
+					} else if (searchChoice == 3) {
 						System.out.println("Enter Skill To Search \n");
 						skill = br.readLine();
 						System.out.println("Data Fetched");
 						Player e2 = playDao.getPlayerBySkill(skill);
-						System.out.println(e2.getPlayer_id() + " " + e2.getPlayer_name() + " " + e2.getPlayer_address() + " " + e2.getPlayer_numberOfMatches() + " " + e2.getWickets() +" "+ e2.getSkill());
-					}
-					else if(searchChoice == 4)
-					{
+						System.out.println(e2.getPlayer_id() + " " + e2.getPlayer_name() + " " + e2.getPlayer_address()
+								+ " " + e2.getPlayer_numberOfMatches() + " " + e2.getWickets() + " " + e2.getSkill() + " " +e2.getDateOfBirth());
+					} else if (searchChoice == 4) {
 						System.out.println("Enter Date to be searched \n");
 						dateOfBirth = br.readLine();
 						System.out.println("Data Fetched");
 						Player e3 = playDao.getPlayerByDate(dateOfBirth);
-						System.out.println(e3.getPlayer_id() + " " + e3.getPlayer_name() + " " + e3.getPlayer_address() + " " + e3.getPlayer_numberOfMatches() + " " + e3.getWickets() +" "+ e3.getSkill());
-					}
-					else
-					{
+						System.out.println(e3.getPlayer_id() + " " + e3.getPlayer_name() + " " + e3.getPlayer_address()
+								+ " " + e3.getPlayer_numberOfMatches() + " " + e3.getWickets() + " " + e3.getSkill() + " " + e3.getDateOfBirth());
+					} else {
 						System.out.println("Invalid choice");
 					}
 
@@ -280,41 +224,34 @@ public class Application {
 						System.out.println("Enter Player Name");
 						playerName = br.readLine();
 						Player tempEmployee = playDao.getPlayer(playerId);
-//						System.out.println("Yha pohocha");
+
 						tempEmployee.setPlayer_name(playerName);
-//						System.out.println("Yha Bhi Pohocha");
+
 						playDao.update(tempEmployee);
 						System.out.println("Successfully Updated");
 
-					}
-					else if(updateField == 2)
-					{
+					} else if (updateField == 2) {
 						System.out.println("Enter Player Name");
 						playerName = br.readLine();
 						Player tempEmployee = playDao.getPlayer(playerId);
 						tempEmployee.setPlayer_name(playerName);
 						playDao.update(tempEmployee);
 						System.out.println("Successfully Updated");
-					}
-					else if(updateField == 3)
-					{
+					} else if (updateField == 3) {
 						System.out.println("Enter Number of Matches");
-						numberOfMatches =Integer.parseInt(br.readLine()) ;
+						numberOfMatches = Integer.parseInt(br.readLine());
 						Player tempEmployee = playDao.getPlayer(playerId);
 						tempEmployee.setPlayer_numberOfMatches(numberOfMatches);
 						playDao.update(tempEmployee);
 						System.out.println("Successfully Updated");
-					}
-					else if(updateField == 4)
-					{
+					} else if (updateField == 4) {
 						System.out.println("Enter Wickets");
 						wickets = Integer.parseInt(br.readLine());
 						Player tempEmployee = playDao.getPlayer(playerId);
 						tempEmployee.setWickets(wickets);
 						playDao.update(tempEmployee);
 						System.out.println("Successfully Updated");
-					}
-					else {
+					} else {
 						System.out.println("Enter Player Skill");
 						skill = br.readLine();
 						Player tempEmployee = playDao.getPlayer(playerId);
@@ -331,10 +268,10 @@ public class Application {
 					break;
 				case 5:
 					System.out.println("All Players");
-					 List<Player> ls = playDao.getPlayers(); 
-				        for (Player allPlayer : ls) { 
-				            System.out.println(allPlayer); 
-				        } 
+					List<Player> ls = playDao.getPlayers();
+					for (Player allPlayer : ls) {
+						System.out.println(allPlayer);
+					}
 					break;
 				default:
 					System.out.println("Entered Wrong Input");
@@ -353,7 +290,6 @@ public class Application {
 		default:
 			System.out.println("Invalid Choice");
 		}
-
 
 //		do {
 //			System.out.println("Select One Option from Below Menu \n");

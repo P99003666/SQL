@@ -30,7 +30,7 @@ public class TeamDaoImplementation implements TeamDao {
 
 	@Override
 	public void deleteTeam(int id) throws SQLException {
-		String query = "delete from teams where team_id =?";
+		String query = "delete from TEAMS where team_id =?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setInt(1, id);
 		ps.executeUpdate();
@@ -39,7 +39,7 @@ public class TeamDaoImplementation implements TeamDao {
 	@Override
 	public Team getTeam(int id) throws SQLException {
 
-		String query = "select * from teams where team_id= ?";
+		String query = "select * from TEAMS where team_id= ?";
 		PreparedStatement ps = con.prepareStatement(query);
 
 		ps.setInt(1, id);
@@ -63,7 +63,7 @@ public class TeamDaoImplementation implements TeamDao {
 
 	@Override
 	public List<Team> getTeams() throws SQLException {
-		String query = "select * from teams";
+		String query = "select * from TEAMS";
 		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		List<Team> ls = new ArrayList();
@@ -82,10 +82,13 @@ public class TeamDaoImplementation implements TeamDao {
 	@Override
 	public void updateTeam(Team tm) throws SQLException {
 
-		String query = "update teams set team_name=?, "+" ownerName = ?, "+" coachName = ? where team_id = ?";
+		String query = "update TEAMS set team_name=?, "+" ownerName = ?, "+" coachName = ? where team_id = ?";
 		PreparedStatement ps = con.prepareStatement(query);
 		ps.setString(1, tm.getTeam_name());
-		ps.setInt(2, tm.getTeam_id());
+		ps.setString(2, tm.getOwnerName());
+		ps.setString(3, tm.getCoachName());
+		
+		ps.setInt(4, tm.getTeam_id());
 		ps.executeUpdate();
 	}
 }
