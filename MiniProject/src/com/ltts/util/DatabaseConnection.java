@@ -9,9 +9,9 @@ public class DatabaseConnection {
 	private static Connection con = null;
 
 	static {
-		String url = "jdbc:mysql://localhost:3306/yash";
+		String url = "jdbc:mysql://localhost:3306/miniproject";
 		String user = "root";
-		String pass = "Root@123";
+		String pass = "root";
 		try {
 			con = DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
